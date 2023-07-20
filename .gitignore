@@ -1,6 +1,6 @@
-.png
-.jpg
-.jpeg
-.gif
-.pdf
-.idea
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.idea
