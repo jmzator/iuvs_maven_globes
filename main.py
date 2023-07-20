@@ -1,75 +1,56 @@
 ########
-# this first block of code is from earlier prep work
-# it will be removed after new commit since this
-# is only making blank squares grid for sizing but
-# I want record of it and to make sure github,
-# gitkraken, and pycharm are function correctly
-# for this newly formed project folder
+# this next block replaces the previous commit's block that
+# output a blank grid of squares for initial trial on sizing
+# this code fills in dummy images into printable grid
+# can change the 'square_size' and 'grid_size' parameter below
+# to get different number of globes of varying sizes on the sheet
+# based upon meeting with Nick & Kyle on 2023-07-17 with different
+# size printouts, for now targeting the size that fits 4 columns
+# and six rows of globes on the 8.5 x 11 printout (which would be
 
-###### below here is the copy/paste from old prep project
+# square_size = 15 and grid_size = 6, 4
 
-# This is a sample Python script.
+# will need to see how that looks on the 42 inch paper rolls then
+# after get approval with some actual globe images
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from PIL import Image, ImageDraw
 
+square_size = 15  # cm
+grid_size = (6, 4)  # number of squares in the grid (rows, columns)
+margin = 0.1  # cm
+output_file = "grid.png"
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# image size in pixels
+image_width = int((grid_size[0] * square_size + (grid_size[0] + 1) * margin) * 37.7952755906)
+image_height = int((grid_size[1] * square_size + (grid_size[1] + 1) * margin) * 37.7952755906)
 
+# blank image
+image = Image.new("RGB", (image_width, image_height), "white")
+draw = ImageDraw.Draw(image)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# add grid lines
+for i in range(grid_size[0] + 1):
+    x = i * (square_size + margin) * 37.7952755906 + margin * 37.7952755906
+    draw.line([(x, margin * 37.7952755906), (x, image_height - margin * 37.7952755906)], fill="black")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+for j in range(grid_size[1] + 1):
+    y = j * (square_size + margin) * 37.7952755906 + margin * 37.7952755906
+    draw.line([(margin * 37.7952755906, y), (image_width - margin * 37.7952755906, y)], fill="black")
 
+# add png dummy file for testing printed size for viewing
+for i in range(grid_size[0]):
+    for j in range(grid_size[1]):
+        # calculate position of square in pixels
+        x = (i + 1) * margin * 37.7952755906 + i * square_size * 37.7952755906
+        y = (j + 1) * margin * 37.7952755906 + j * square_size * 37.7952755906
 
-####### start with copy over of blank sheet code
+        png_file = Image.open("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png")
 
-import matplotlib.pyplot as plt
-import numpy as np
+        # resize to fit in the square
+        png_file.thumbnail((square_size * 37.7952755906, square_size * 37.7952755906))
+        image.paste(png_file, (int(x), int(y)))
 
-square_size_cm = 9
-num_rows = 10
-num_cols = 10
+# save final image
+image.save(output_file)
 
-# convert square size to inches since this will be for 8.5 x 11 inch paper print
-square_size_inches = square_size_cm / 2.54
-
-# create array of zeros representing the grid
-grid = np.zeros((num_rows, num_cols))
-
-# set figure size based on number of rows and columns
-fig, ax = plt.subplots(figsize=(num_cols, num_rows))
-
-# plot grid
-ax.imshow(grid, cmap='gray')
-
-# set tick locations and labels so can choose if want later
-ax.set_xticks(np.arange(-0.5, num_cols, 1))
-ax.set_yticks(np.arange(-0.5, num_rows, 1))
-ax.set_xticklabels([])
-ax.set_yticklabels([])
-
-# set grid lines so can choose if want later
-ax.grid(color='white', linestyle='-', linewidth=1)
-
-# set aspect ratio of plot
-ax.set_aspect('equal')
-
-# set the plot limits
-ax.set_xlim([-0.5, num_cols - 0.5])
-ax.set_ylim([-0.5, num_rows - 0.5])
-
-# set tick length to 0 to remove visible ticks (may need later)
-ax.tick_params(axis='both', length=0)
-
-# save plot as pdf
-plt.savefig('printable_grid.pdf', format='pdf')
-
-# show plot
-plt.show()
-
-###### end that block
+####end that part####
