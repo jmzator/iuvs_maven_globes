@@ -54,3 +54,62 @@ for i in range(grid_size[0]):
 image.save(output_file)
 
 ####end that part####
+
+#### now adding the code I had started building for reading the
+# fits files into an array for histogram equalization prior to
+# mapping onto globe - this is just copy/paste of code in the state
+# it was in after Kyle helped me on 2023-07-17, so it still needs
+# clean up since includes my code plus Kyle's more efficient code
+# for reading in the files - also note I need to work on getting
+# rid of errors from the latter part of that meeting
+# copy/paste follows this:
+
+
+# This is a sample Python script.
+
+# Press ⌃R to execute it or replace it with your code.
+# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+from pathlib import Path
+import numpy as np
+from astropy.io import fits
+
+# list of fits files
+top_path = Path("/Users/jmzator/Desktop/maven_iuvs_visualization_project/orbit18001/")
+file_paths = sorted(top_path.glob('*orbit18001*.gz'))
+#file_paths = [top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T072050_v13_r01.fits.gz', top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T071804_v13_r01.fits.gz', top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T071818_v13_r01.fits.gz']
+
+# empty list to store the data arrays
+'''data_arrays = []
+
+# loop over the file paths
+for file_path in file_paths:
+    with fits.open(file_path) as hdulist:
+        data = hdulist[0].data
+        data_arrays.append(data)'''
+
+def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
+    return arr if np.ndim(arr) == 3 else arr[None, ...]
+
+hduls = [fits.open(f) for f in file_paths]
+data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls])
+print(data_arrays.shape)
+raise SystemExit(9)
+
+# stacked_data = np.stack(data_arrays, axis=0)
+
+print(np.shape(data))
+
+###### end that part from 2023-07-17 work ######
