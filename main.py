@@ -71,27 +71,19 @@ from astropy.io import fits
 
 # list of fits files
 top_path = Path("/Users/jmzator/Desktop/maven_iuvs_visualization_project/orbit18001/")
+# note this 'top_path' pulls from old pycharm project, once working, need to change to main source of orbits data
 file_paths = sorted(top_path.glob('*orbit18001*.gz'))
-#file_paths = [top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T072050_v13_r01.fits.gz', top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T071804_v13_r01.fits.gz', top_path + 'mvn_iuv_l1b_apoapse-orbit18001-muv_20230114T071818_v13_r01.fits.gz']
 
-# empty list to store the data arrays
-'''data_arrays = []
-
-# loop over the file paths
-for file_path in file_paths:
-    with fits.open(file_path) as hdulist:
-        data = hdulist[0].data
-        data_arrays.append(data)'''
 
 def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
     return arr if np.ndim(arr) == 3 else arr[None, ...]
+
 
 hduls = [fits.open(f) for f in file_paths]
 data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls])
 print(data_arrays.shape)
 raise SystemExit(9)
 
-# stacked_data = np.stack(data_arrays, axis=0)
 
 print(np.shape(data))
 
@@ -121,7 +113,9 @@ print(np.shape(data))
 # use numpy vstack, throw away all fuv, use only muv,
 # stack those primary ones - prob dimensions like (200, x, 19) first one
 
+# keep the functions commented out until get arrays issue correct
 
+'''
 def make_equidistant_spectral_cutoff_indices(n_spectral_bins: int) -> tuple[int, int]:
     """Make indices such that the input spectral bins are in 3 equally spaced color channels.
     Parameters
@@ -240,7 +234,7 @@ def histogram_equalize_detector_image(image: np.ndarray, mask: np.ndarray = None
     """
     coadded_image = turn_detector_image_to_3_channels(image)
     return histogram_equalize_rgb_image(coadded_image, mask=mask)
-
+'''
 
 ######### end Kyle's code from email###########
 ######### end copy/paste from old pycharm project ##########
