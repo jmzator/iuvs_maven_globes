@@ -55,6 +55,8 @@ image.save(output_file)
 
 ####end that part####
 
+
+
 #### now adding the code I had started building for reading the
 # fits files into an array for histogram equalization prior to
 # mapping onto globe - this is just copy/paste of code in the state
@@ -63,7 +65,6 @@ image.save(output_file)
 # for reading in the files - also note I need to work on getting
 # rid of errors from the latter part of that meeting
 # copy/paste follows this:
-
 
 from pathlib import Path
 import numpy as np
@@ -95,7 +96,6 @@ print(np.shape(data))
 # now adding copy/paste of histogram equalization code blocks
 # from Kyle for once have array of fits files in proper shape
 # copy/paste from old pycharm project follows:
-
 
 # now, here's code from Kyle email today 2023 May 22 regarding
 # histogram equalization algorithm in python, a well-known
@@ -238,4 +238,5 @@ def histogram_equalize_detector_image(image: np.ndarray, mask: np.ndarray = None
 
 ######### end Kyle's code from email###########
 ######### end copy/paste from old pycharm project ##########
+
 
