@@ -1,3 +1,28 @@
+########################## 2023-07-21 ###########
+# now adding copy/paste of histogram equalization code blocks
+# from Kyle for once have array of fits files in proper shape
+# copy/paste from old pycharm project follows:
+
+# now, here's code from Kyle email today 2023 May 22 regarding
+# histogram equalization algorithm in python, a well-known
+# data visualization algorithm and something needed for
+# producing the globe images from IUVS apoapse data for this project
+# several functions follow:
+
+# note from after codes blocks:
+# Kyle convo 2023 May 23 lunch break from PSG: really only need to use
+# the last function since that one calls the previous functions
+# just read in the muv files don't need fuv, etc.
+# the .gz on end of .fits is just compression and astropy knows how
+# to uncompress when read in those files, so no need to manually unzip
+
+# use numpy vstack, throw away all fuv, use only muv,
+# stack those primary ones - prob dimensions like (200, x, 19) first one
+
+# keep the functions commented out until get arrays issue correct
+
+
+
 import numpy as np
 
 
@@ -120,3 +145,7 @@ def histogram_equalize_detector_image(image: np.ndarray, mask: np.ndarray = None
     coadded_image = turn_detector_image_to_3_channels(image)
     return histogram_equalize_rgb_image(coadded_image, mask=mask)
 
+
+
+######### end Kyle's code from email###########
+######### end copy/paste from old pycharm project ##########
