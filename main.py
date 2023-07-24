@@ -1,8 +1,9 @@
+
 from coloring import histogram_equalize_detector_image
 
+
+
 ########
-# this next block replaces the previous commit's block that
-# output a blank grid of squares for initial trial on sizing
 # this code fills in dummy images into printable grid
 # can change the 'square_size' and 'grid_size' parameter below
 # to get different number of globes of varying sizes on the sheet
@@ -55,18 +56,13 @@ for i in range(grid_size[0]):
 # save final image
 image.save(output_file)
 
-####end that part####
+#### end that part ####
 
 
 
-#### now adding the code I had started building for reading the
-# fits files into an array for histogram equalization prior to
-# mapping onto globe - this is just copy/paste of code in the state
-# it was in after Kyle helped me on 2023-07-17, so it still needs
-# clean up since includes my code plus Kyle's more efficient code
-# for reading in the files - also note I need to work on getting
-# rid of errors from the latter part of that meeting
-# copy/paste follows this:
+###########
+# now adding the code for reading the fits files into an array
+# for histogram equalization prior to mapping onto globe
 
 from pathlib import Path
 import numpy as np
@@ -91,7 +87,9 @@ raise SystemExit(9)
 
 print(np.shape(data))
 
-###### end that part from 2023-07-17 work ######
+
+###### end that part ######
 
 
 
+# histogram fxn next, need to troubleshoot the import at top
