@@ -6,3 +6,5 @@
 *.idea
 *.tiff
 venv
+.idea/
+.idea

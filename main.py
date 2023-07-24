@@ -82,6 +82,7 @@ def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
     return arr if np.ndim(arr) == 3 else arr[None, ...]
 
 
+# note below 790 volts for exluding nightside data (>790 is nightside, <790 is dayside that want to use)
 hduls = [fits.open(f) for f in file_paths]
 data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
 print(data_arrays.shape)
