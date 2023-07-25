@@ -1,6 +1,8 @@
 
+# ???? why can't get these imports to work??? trying to call functions below...
 from histogram_coloring import histogram_equalize_detector_image
 from matplotlib_dummy_grid import plot_images_on_grid
+import matplotlib_dummy_grid
 
 
 ###########
@@ -39,5 +41,19 @@ print(np.shape(data))
 
 # histogram fxn next, need to troubleshoot the import at top
 # try import of matplotlib_dummy_grid.py function that working on too
+
+# fxn (image: np.ndarray, mask: np.ndarray = None) -> np.ndarray:
+histogram_equalize_detector_image()
+
+
+# fxn (image_dir, image_files, output_file)
+matplotlib_dummy_grid.plot_images_on_grid()
+plot_images_on_grid()
+
+
+#### start cartopy code - haven't gotten to work in other test project
+# add some of that code here and go from there...
+
+import cartopy
 
 
