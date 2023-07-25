@@ -1,5 +1,5 @@
 
-from coloring import histogram_equalize_detector_image
+from histogram_coloring import histogram_equalize_detector_image
 from matplotlib_dummy_grid import plot_images_on_grid
 
 
@@ -7,9 +7,11 @@ from matplotlib_dummy_grid import plot_images_on_grid
 # now adding the code for reading the fits files into an array
 # for histogram equalization prior to mapping onto globe
 
+
 from pathlib import Path
 import numpy as np
 from astropy.io import fits
+
 
 # list of fits files
 top_path = Path("/Users/jmzator/Desktop/maven_iuvs_visualization_project/orbit18001/")
@@ -37,4 +39,5 @@ print(np.shape(data))
 
 # histogram fxn next, need to troubleshoot the import at top
 # try import of matplotlib_dummy_grid.py function that working on too
+
 

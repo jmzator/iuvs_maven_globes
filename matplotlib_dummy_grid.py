@@ -1,6 +1,7 @@
+
 import os
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 def plot_images_on_grid(image_dir, image_files, output_file):
     # number of rows and columns in grid
