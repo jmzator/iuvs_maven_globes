@@ -72,3 +72,4 @@ plot_images_on_grid(image_dir, image_files, output_file)
 # works in different py file in this project; what's going on??????
 ##### BASED ON RESEARCH, THINK IT WAS THE RAISE SYSTEM EXIT CODE THAT STOPS PROGRAM AND GIVES 'ERROR' MESSAGE 9
 
+
