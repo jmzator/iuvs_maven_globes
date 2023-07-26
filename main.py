@@ -2,7 +2,6 @@
 # ???? why can't get these imports to work??? trying to call functions below...
 from histogram_coloring import histogram_equalize_detector_image
 from matplotlib_dummy_grid import plot_images_on_grid
-import matplotlib_dummy_grid
 
 
 ###########
@@ -43,17 +42,21 @@ print(np.shape(data))
 # try import of matplotlib_dummy_grid.py function that working on too
 
 # fxn (image: np.ndarray, mask: np.ndarray = None) -> np.ndarray:
-histogram_equalize_detector_image()
+#histogram_equalize_detector_image()
 
 
 # fxn (image_dir, image_files, output_file)
-matplotlib_dummy_grid.plot_images_on_grid()
-plot_images_on_grid()
+#plot_images_on_grid()
+
+# before, couldn't get the fxn to fun in main, now when running main, always runs fxn even when not calling it??????
+
+#matplotlib_dummy_grid.plot_images_on_grid("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/", "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png", "sample_grid.png")
+#plot_images_on_grid("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/", "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png", "sample_grid.png")
 
 
 #### start cartopy code - haven't gotten to work in other test project
 # add some of that code here and go from there...
 
-import cartopy
+# import cartopy
 
 

@@ -28,9 +28,10 @@ def plot_images_on_grid(image_dir, image_files, output_file):
     plt.savefig(output_file)
     plt.close()
 
-if __name__ == "__main__":
-    image_directory = "/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/"
-    image_files = [
+
+# removed 'if __name__ == "__main__":' above this and got rid of indents below
+image_directory = "/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/"
+image_files = [
         "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
         "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
         "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
@@ -44,8 +45,9 @@ if __name__ == "__main__":
         # above is just two dummy images over and over again
         # add more then, for final project will need code to add all as created
     ]
-    output_file = "sample_grid.png"
-    plot_images_on_grid(image_directory, image_files, output_file)
+output_file = "sample_grid.png"
+
+plot_images_on_grid(image_directory, image_files, output_file)
 
 
 ### end ###
