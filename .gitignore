@@ -10,3 +10,4 @@ venv
 .idea
 grid_samples
 globe_samples
+*.npy
