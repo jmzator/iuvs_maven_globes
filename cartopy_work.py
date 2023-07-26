@@ -21,12 +21,13 @@ ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=0, 
 ax.set_global()
 
 # plot the 2d data array
-img = ax.pcolormesh(lon2d, lat2d, data, transform=ccrs.PlateCarree(), cmap='jet')
+img = ax.pcolormesh(lon2d, lat2d, data, transform=ccrs.PlateCarree(), cmap='viridis')
 
 # plt.show()
 
 plt.savefig("globe_try.png")
 
+# this code block works to produce viridis colored pixels globe as test/sample
 
-# this code block works to produce rainbow colored pixels globe
 
+### end ###

@@ -1,8 +1,8 @@
 
-# ???? why can't get these imports to work??? trying to call functions below...
+# I think source of most problems on main.py was the system exit code I didn't know what it did
 from histogram_coloring import histogram_equalize_detector_image
 from matplotlib_dummy_grid import plot_images_on_grid
-import matplotlib_dummy_grid
+
 
 ###########
 # now adding the code for reading the fits files into an array
@@ -28,25 +28,33 @@ def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
 hduls = [fits.open(f) for f in file_paths]
 data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
 print(data_arrays.shape)
-raise SystemExit(9)
+#raise SystemExit(9)
 
-
-print(np.shape(data))
+#print(np.shape(data_arrays))
 
 
 ###### end ######
 
 
 
-# histogram fxn next, need to troubleshoot the import at top
-# try import of matplotlib_dummy_grid.py function that working on too
+# histogram fxn next
+# attempt import of matplotlib_dummy_grid.py function that working on too
 
 # fxn (image: np.ndarray, mask: np.ndarray = None) -> np.ndarray:
-#histogram_equalize_detector_image()
+histogram_equalize_detector_image(data_arrays)
 
 
 # fxn (image_dir, image_files, output_file)
-#plot_images_on_grid()
+image_dir = "/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/"
+image_files = [
+        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
+        "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
+
+        # above is just two dummy images over and over again
+        # add more then, for final project will need code to add all as created
+    ]
+output_file = "sample_grid_on_main.png"
+plot_images_on_grid(image_dir, image_files, output_file)
 
 # before, couldn't get the fxn to fun in main, now when running main, always runs fxn even when not calling it??????
 
@@ -61,4 +69,5 @@ print(np.shape(data))
 # did I change a setting in main? or put stop point above that's preventing code from fully running?
 # I've spent at least 6 hours over today and yesterday working in main and not realizing same code
 # works in different py file in this project; what's going on??????
+##### BASED ON RESEARCH, THINK IT WAS THE RAISE SYSTEM EXIT CODE THAT STOPS PROGRAM AND GIVES 'ERROR' MESSAGE 9
 
