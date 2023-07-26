@@ -32,6 +32,7 @@ print(data_arrays.shape)
 
 #print(np.shape(data_arrays))
 
+#np.save('iuvs_test_array', data_arrays)
 
 ###### end ######
 
