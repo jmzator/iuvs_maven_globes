@@ -2,7 +2,7 @@
 # ???? why can't get these imports to work??? trying to call functions below...
 from histogram_coloring import histogram_equalize_detector_image
 from matplotlib_dummy_grid import plot_images_on_grid
-
+import matplotlib_dummy_grid
 
 ###########
 # now adding the code for reading the fits files into an array
@@ -54,9 +54,11 @@ print(np.shape(data))
 #plot_images_on_grid("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/", "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png", "sample_grid.png")
 
 
-#### start cartopy code - haven't gotten to work in other test project
-# add some of that code here and go from there...
 
-# import cartopy
-
+# main.py seems to be having issues running code - is there a stop point somewhere above??
+# I couldn't get cartopy code to work and output a figure in main, but when copied
+# over to new python file 'cartopy_work.py' then it ran with no issue immediately
+# did I change a setting in main? or put stop point above that's preventing code from fully running?
+# I've spent at least 6 hours over today and yesterday working in main and not realizing same code
+# works in different py file in this project; what's going on??????
 
