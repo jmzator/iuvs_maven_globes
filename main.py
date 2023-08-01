@@ -54,6 +54,7 @@ image_files = [
         # above is just two dummy images over and over again
         # add more then, for final project will need code to add all as created
     ]
+
 output_file = "sample_grid_on_main.png"
 plot_images_on_grid(image_dir, image_files, output_file)
 
@@ -61,7 +62,6 @@ plot_images_on_grid(image_dir, image_files, output_file)
 
 #matplotlib_dummy_grid.plot_images_on_grid("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/", "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png", "sample_grid.png")
 #plot_images_on_grid("/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/", "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png", "sample_grid.png")
-
 
 
 # main.py seems to be having issues running code - is there a stop point somewhere above??
