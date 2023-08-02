@@ -2,6 +2,10 @@
 # I think source of most problems on main.py was the system exit code I didn't know what it did
 from histogram_coloring import histogram_equalize_detector_image
 from dummy_grid import plot_images_on_grid
+from globe_functions import checkerboard
+from globe_functions import latlon_meshgrid
+from globe_functions import make_apoapse_muv_globe
+
 
 
 ###########
@@ -26,8 +30,8 @@ def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
 
 # note below 790 volts for exluding nightside data (>790 is nightside, <790 is dayside that want to use)
 hduls = [fits.open(f) for f in file_paths]
-data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
-print(data_arrays.shape)
+# data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
+# print(data_arrays.shape)
 #raise SystemExit(9)
 
 #print(np.shape(data_arrays))
@@ -42,7 +46,7 @@ print(data_arrays.shape)
 # attempt import of dummy_grid.py function that working on too
 
 # fxn (image: np.ndarray, mask: np.ndarray = None) -> np.ndarray:
-histogram_equalize_detector_image(data_arrays)
+# histogram_equalize_detector_image(data_arrays)
 
 
 # fxn (image_dir, image_files, output_file)
@@ -73,3 +77,9 @@ plot_images_on_grid(image_dir, image_files, output_file)
 ##### BASED ON RESEARCH, THINK IT WAS THE RAISE SYSTEM EXIT CODE THAT STOPS PROGRAM AND GIVES 'ERROR' MESSAGE 9
 
 
+# checkerboard()
+print(checkerboard())
+
+# latlon_meshgrid()
+
+# make_apoapse_muv_globe()
