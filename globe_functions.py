@@ -2,6 +2,11 @@
 ##### from Kyle email 2023-08-01 from his quick look globes code
 # look through, understand it, ask questions, then work on using it!
 
+import numpy as np
+import matplotlib as plt
+import cartopy.crs as ccrs
+from histogram_coloring import histogram_equalize_detector_image
+
 
 def checkerboard():
     """
@@ -18,7 +23,7 @@ def checkerboard():
     """
     return np.repeat(np.kron([[0.67, 0.33] * 36, [0.33, 0.67] * 36] * 18, np.ones((5, 5)))[:, :, None], 3, axis=2)
 
-This will create an array for cartopy to plot latitude and longitudes.
+# This will create an array for cartopy to plot latitude and longitudes.
 
 def latlon_meshgrid(latitude, longitude, altitude):
     # make meshgrids to hold latitude and longitude grids for pcolormesh display
@@ -60,8 +65,8 @@ def latlon_meshgrid(latitude, longitude, altitude):
     # return the coordinate arrays and the mask
     return X, Y
 
-This is the "main" function that creates globes. I made these using hdf5 files,
-so you'll need to vstack the data every time you see f['some/path']
+# This is the "main" function that creates globes. I made these using hdf5 files,
+# so you'll need to vstack the data every time you see f['some/path']
 
 
 def make_apoapse_muv_globe(orbit: int) -> None:
@@ -132,7 +137,7 @@ def make_apoapse_muv_globe(orbit: int) -> None:
     plt.savefig(save_location / save)
     plt.close(fig)
 
-These are helper functions for working with the IUVS orbit block conventions
+# These are helper functions for working with the IUVS orbit block conventions
 
 import math
 
