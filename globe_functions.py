@@ -2,10 +2,18 @@
 ##### from Kyle email 2023-08-01 from his quick look globes code
 # look through, understand it, ask questions, then work on using it!
 
+# "I have some functions that I use when plotting globes / quicklooks.
+# I think you will benefit from these. Please ask questions about their purpose if you have them.
+# I started creating globes by plotting a checkerboard pattern on a globe.
+# This way it's fairly clear what is and is not data. When you plot data, it'll overplot the checkerboard"
+
+
 import numpy as np
 import matplotlib as plt
 import cartopy.crs as ccrs
 from histogram_coloring import histogram_equalize_detector_image
+
+
 
 
 def checkerboard():
@@ -68,7 +76,7 @@ def latlon_meshgrid(latitude, longitude, altitude):
 # This is the "main" function that creates globes. I made these using hdf5 files,
 # so you'll need to vstack the data every time you see f['some/path']
 
-# add in file and path, etc to clear errors
+# add in file and path, etc to clear errors as said in code comments above
 
 def make_apoapse_muv_globe(orbit: int) -> None:
     orbit_block = make_orbit_block(orbit)
