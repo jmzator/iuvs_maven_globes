@@ -68,6 +68,7 @@ def latlon_meshgrid(latitude, longitude, altitude):
 # This is the "main" function that creates globes. I made these using hdf5 files,
 # so you'll need to vstack the data every time you see f['some/path']
 
+# add in file and path, etc to clear errors
 
 def make_apoapse_muv_globe(orbit: int) -> None:
     orbit_block = make_orbit_block(orbit)
@@ -124,7 +125,7 @@ def make_apoapse_muv_globe(orbit: int) -> None:
         colors = np.reshape(rgb, (rgb.shape[0] * rgb.shape[1], rgb.shape[2]))
         globe_ax.pcolormesh(x, y, fill, color=colors, linewidth=0, edgecolors='none', rasterized=True, transform=transform).set_array(None)
 
-    # Get info I need for the filename
+    # Get info I need for the filename (add this in to clear errors)
     solar_longitude = f['apoapse/apsis/solar_longitude'][:][0]
     subsolar_subspacecraft_angle = f['apoapse/apsis/subsolar_subspacecraft_angle'][:][0]
     spatial_bin_width = f['apoapse/muv/dayside/binning/spatial_bin_edges'][:].shape[0] - 1
