@@ -8,6 +8,8 @@ from globe_functions import make_apoapse_muv_globe
 
 
 
+
+
 ###########
 # now adding the code for reading the fits files into an array
 # for histogram equalization prior to mapping onto globe
@@ -19,8 +21,8 @@ from astropy.io import fits
 
 
 # list of fits files
-top_path = Path("/Users/jmzator/Desktop/maven_iuvs_visualization_project/orbit18001/")
-# note this 'top_path' pulls from old pycharm project, once working, need to change to main source of orbits data
+top_path = Path("/Users/jmzator/Desktop/orbits/18001/")
+
 file_paths = sorted(top_path.glob('*orbit18001*.gz'))
 
 
@@ -30,8 +32,8 @@ def add_dimension_if_necessary(arr: np.ndarray) -> np.ndarray:
 
 # note below 790 volts for exluding nightside data (>790 is nightside, <790 is dayside that want to use)
 hduls = [fits.open(f) for f in file_paths]
-# data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
-# print(data_arrays.shape)
+data_arrays = np.vstack([add_dimension_if_necessary(f['primary'].data) for f in hduls if f['observation'].data['mcp_volt'] < 790])
+print(data_arrays.shape)
 #raise SystemExit(9)
 
 #print(np.shape(data_arrays))
@@ -77,9 +79,12 @@ plot_images_on_grid(image_dir, image_files, output_file)
 ##### BASED ON RESEARCH, THINK IT WAS THE RAISE SYSTEM EXIT CODE THAT STOPS PROGRAM AND GIVES 'ERROR' MESSAGE 9
 
 
+
+
 # checkerboard()
 print(checkerboard())
 
-# latlon_meshgrid()
+#latlon_meshgrid()
+#print(latlon_meshgrid())
 
 # make_apoapse_muv_globe()
