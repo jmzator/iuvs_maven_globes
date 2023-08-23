@@ -30,17 +30,17 @@ def plot_images_on_grid(image_dir, image_files, output_file):
 
 
 # removed 'if __name__ == "__main__":' above this and got rid of indents below
-image_directory = "/Users/jmzator/Desktop/LASP_Maven_job/globe_sample_images/dummy_images_from_kyle/"
+image_directory = "/Users/jmzator/Desktop/iuvs_maven_globes/first_globes_for_poster_print_sample"
 image_files = [
-        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
-        "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
-        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
-        "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
-        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
-        "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
-        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
-        "orbit03475-Ls1843-angle0345-binning0133x0019-heq-globe.png",
-        "orbit03453-Ls1820-angle0410-binning0133x0019-heq-globe.png",
+        "globe_orbit_18001.png",
+        "globe_orbit_18102.png",
+        "globe_orbit_18111.png",
+        "globe_orbit_18119.png",
+        "globe_orbit_18120.png",
+        "globe_orbit_18152.png",
+        "globe_orbit_18166.png",
+        "globe_orbit_18172.png",
+        "globe_orbit_18173.png",
 
         # above is just two dummy images over and over again
         # add more then, for final project will need code to add all as created
