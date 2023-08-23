@@ -50,7 +50,7 @@ def compute_swath_number(mirror_angle: np.ndarray) -> np.ndarray:
 
     return swath_number
 
-files = sorted(Path('/Users/jmzator/Desktop/orbits/18001/').glob('*apoapse*muv*gz'))
+files = sorted(Path('/Users/jmzator/Desktop/orbits/18002/').glob('*apoapse*muv*gz'))
 
 
 hduls = [fits.open(f) for f in files]
@@ -85,7 +85,7 @@ projection = ccrs.NearsidePerspective(central_latitude=subspacecraft_latitude, c
 transform = ccrs.PlateCarree(globe=globe)
 globe_ax = plt.axes(projection=projection)
 
-checkerboard_surface = checkerboard() # * 0.1 (to make checkerboard darker or less visible as checkers
+checkerboard_surface = checkerboard()  * 0.1 # (the 0.1 to make checkerboard darker or less visible as checkers
 globe_ax.imshow(checkerboard_surface, transform=transform, extent=[-180, 180, -90, 90])
 
 
@@ -142,4 +142,7 @@ for swath in np.unique(swath_number):
     globe_ax.pcolormesh(x, y, fill, color=colors, linewidth=0, edgecolors='none', rasterized=True,
                         transform=transform).set_array(None)
 
-plt.show()
+#plt.show()
+
+plt.savefig('globe_orbit_1')
+plt.close()
