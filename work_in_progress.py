@@ -57,8 +57,8 @@ hduls = [fits.open(f) for f in files]
 
 primary = np.vstack([f['primary'].data for f in hduls])
 alts = np.vstack([f['pixelgeometry'].data['pixel_corner_mrh_alt'][..., 4] for f in hduls])
-latitudes = np.vstack([f['pixelgeometry'].data['pixel_corner_lat'][..., 4] for f in hduls])
-longitudes = np.vstack([f['pixelgeometry'].data['pixel_corner_lon'][..., 4] for f in hduls])
+latitudes = np.vstack([f['pixelgeometry'].data['pixel_corner_lat'] for f in hduls])
+longitudes = np.vstack([f['pixelgeometry'].data['pixel_corner_lon'] for f in hduls])
 solar_zenith_angles = np.vstack([f['pixelgeometry'].data['pixel_solar_zenith_angle'] for f in hduls])
 
 mirror_angle = np.concatenate([f['integration'].data['mirror_deg'] for f in hduls])
@@ -69,7 +69,7 @@ flatfield = np.load('/Users/jmzator/Desktop/iuvs_maven_globes/muv_flatfield_133x
 primary = primary/flatfield
 
 mask = np.logical_and(alts==0, solar_zenith_angles <= 102)
-rgb = histogram_equalize_detector_image(primary, mask = mask)/255
+image = histogram_equalize_detector_image(primary, mask = mask)/255
 
 apsis = File('/Users/jmzator/Desktop/apsis.hdf5')
 
@@ -85,6 +85,61 @@ projection = ccrs.NearsidePerspective(central_latitude=subspacecraft_latitude, c
 transform = ccrs.PlateCarree(globe=globe)
 globe_ax = plt.axes(projection=projection)
 
-checkerboard_surface = checkerboard() * 0.1
+checkerboard_surface = checkerboard() # * 0.1 (to make checkerboard darker or less visible as checkers
 globe_ax.imshow(checkerboard_surface, transform=transform, extent=[-180, 180, -90, 90])
+
+
+def latlon_meshgrid(latitude, longitude, altitude):
+    # make meshgrids to hold latitude and longitude grids for pcolormesh display
+    X = np.zeros((latitude.shape[0] + 1, latitude.shape[1] + 1))
+    Y = np.zeros((longitude.shape[0] + 1, longitude.shape[1] + 1))
+    mask = np.ones((latitude.shape[0], latitude.shape[1]))
+
+    # loop through pixel geometry arrays
+    for i in range(int(latitude.shape[0])):
+        for j in range(int(latitude.shape[1])):
+
+            # there are some pixels where some of the pixel corner longitudes are undefined
+            # if we encounter one of those, set the data value to missing so it isn't displayed
+            # with pcolormesh
+            if np.size(np.where(np.isfinite(longitude[i, j]))) != 5:
+                mask[i, j] = np.nan
+
+            # also mask out non-disk pixels
+            if altitude[i, j] != 0:
+                mask[i, j] = np.nan
+
+            # place the longitude and latitude values in the meshgrids
+            X[i, j] = longitude[i, j, 1]
+            X[i + 1, j] = longitude[i, j, 0]
+            X[i, j + 1] = longitude[i, j, 3]
+            X[i + 1, j + 1] = longitude[i, j, 2]
+            Y[i, j] = latitude[i, j, 1]
+            Y[i + 1, j] = latitude[i, j, 0]
+            Y[i, j + 1] = latitude[i, j, 3]
+            Y[i + 1, j + 1] = latitude[i, j, 2]
+
+    # set any of the NaN values to zero (otherwise pcolormesh will break even if it isn't displaying the pixel).
+    X[np.where(~np.isfinite(X))] = 0
+    Y[np.where(~np.isfinite(Y))] = 0
+
+    # set to domain [-180,180)
+    X[np.where(X > 180)] -= 360
+
+    # return the coordinate arrays and the mask
+    return X, Y
+
+
+for swath in np.unique(swath_number):
+    swath_indices = swath_number == swath
+
+    x, y = latlon_meshgrid(latitudes[swath_indices], longitudes[swath_indices], alts[swath_indices])
+
+    rgb = image[swath_indices]
+    fill = rgb[..., 0]
+
+    colors = np.reshape(rgb, (rgb.shape[0] * rgb.shape[1], rgb.shape[2]))
+    globe_ax.pcolormesh(x, y, fill, color=colors, linewidth=0, edgecolors='none', rasterized=True,
+                        transform=transform).set_array(None)
+
 plt.show()
