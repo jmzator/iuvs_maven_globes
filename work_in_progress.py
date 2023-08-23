@@ -50,7 +50,16 @@ def compute_swath_number(mirror_angle: np.ndarray) -> np.ndarray:
 
     return swath_number
 
-files = sorted(Path('/Users/jmzator/Desktop/orbits/18002/').glob('*apoapse*muv*gz'))
+
+# original filepath for first globe tests right below
+#files = sorted(Path('/Users/jmzator/Desktop/orbits/18002/').glob('*apoapse*muv*gz'))
+
+# now try rewriting for exHD saved orbits that are bulk saved
+files = sorted(Path('/Volumes/LASP_MAVEN/orbit18100/').glob('*apoapse*18154*muv*gz'))
+# this works, just need to have exHD plugged in and then just change the wildcard
+# after glob to give specific orbit
+# note that this leaves some globe portions black for some orbits so
+# I need to configure the lat/lon for each globe, pull that from header prob
 
 
 hduls = [fits.open(f) for f in files]
@@ -73,9 +82,10 @@ image = histogram_equalize_detector_image(primary, mask = mask)/255
 
 apsis = File('/Users/jmzator/Desktop/apsis.hdf5')
 
+# here's where can manually change lat/lon (mostly lon) for individual globe creation
 subspacecraft_altitude = 5000 # apsis['apoapse/spacecraft_altitude'][5000]
-subspacecraft_latitude = 30 # apsis['apoapse/subspacecraft_latitude'][18000]
-subspacecraft_longitude = 45 # apsis['apoapse/subspacecraft_longitude'][18000]
+subspacecraft_latitude = 30 #30 # apsis['apoapse/subspacecraft_latitude'][18000]
+subspacecraft_longitude = 125 #-55 lon each orbit #45 # apsis['apoapse/subspacecraft_longitude'][18000]
 
 rmars = 3400
 fig = plt.figure(figsize=(6, 6), facecolor='w', dpi=200)
