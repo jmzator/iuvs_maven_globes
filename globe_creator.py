@@ -55,7 +55,7 @@ def compute_swath_number(mirror_angle: np.ndarray) -> np.ndarray:
 #files = sorted(Path('/Users/jmzator/Desktop/orbits/18002/').glob('*apoapse*muv*gz'))
 
 # now try rewriting for exHD saved orbits that are bulk saved
-files = sorted(Path('/Volumes/LASP_MAVEN/orbit18100/').glob('*apoapse*18154*muv*gz'))
+files = sorted(Path('/Volumes/LASP_MAVEN/orbit03400/').glob('*apoapse*03403*muv*gz'))
 # this works, just need to have exHD plugged in and then just change the wildcard
 # after glob to give specific orbit
 # note that this leaves some globe portions black for some orbits so
@@ -73,7 +73,7 @@ solar_zenith_angles = np.vstack([f['pixelgeometry'].data['pixel_solar_zenith_ang
 mirror_angle = np.concatenate([f['integration'].data['mirror_deg'] for f in hduls])
 swath_number = compute_swath_number(mirror_angle)
 
-flatfield = np.load('/Users/jmzator/Desktop/iuvs_maven_globes/muv_flatfield_133x19.npy')[:,1:16]
+flatfield = np.load('/Users/jmzator/Desktop/iuvs_maven_globes/muv_flatfield_133x19.npy')[:,:] # [:,1:16]
 
 primary = primary/flatfield
 
@@ -83,9 +83,11 @@ image = histogram_equalize_detector_image(primary, mask = mask)/255
 apsis = File('/Users/jmzator/Desktop/apsis.hdf5')
 
 # here's where can manually change lat/lon (mostly lon) for individual globe creation
-subspacecraft_altitude = 5000 # apsis['apoapse/spacecraft_altitude'][5000]
-subspacecraft_latitude = 30 #30 # apsis['apoapse/subspacecraft_latitude'][18000]
-subspacecraft_longitude = 125 #-55 lon each orbit #45 # apsis['apoapse/subspacecraft_longitude'][18000]
+# for orbits prior to about 17,500 can use the hdf5 file to get the following for each orbit
+# change the [] entry to one prior to the orbit number
+subspacecraft_altitude = apsis['apoapse/spacecraft_altitude'][3402] # 5000
+subspacecraft_latitude = apsis['apoapse/subspacecraft_latitude'][3402] # 30 [18000]
+subspacecraft_longitude = apsis['apoapse/subspacecraft_longitude'][3402] # 45 or 125 #-55 lon each orbit [18000]
 
 rmars = 3400
 fig = plt.figure(figsize=(6, 6), facecolor='w', dpi=200)
